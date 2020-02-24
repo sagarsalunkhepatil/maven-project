@@ -5,21 +5,21 @@ pipeline {
     stages 
     {  
         
-        stage ('SCM Checkout') {
-          git 'https://github.com/prakashk0301/maven-project'
+        stage ('SCM Checkout') 
+	    {
+		    steps {	    
+          git branch: 'master', url: 'https://github.com/sagarsalunkhepatil/maven-project.git'
          }
     
     }
-    {
-                            
-        
-        stage ('Testing Stage') {
+                              
+        stage ('validate') {
 
 
             steps {
-                withMaven(maven : 'LocalMaven')
-                {
-                    sh 'mvn test'
+		withMaven(jdk: 'localjdk-1.8', maven: 'localmaven')     
+                              {
+                    sh 'mvn validate'
                 }
                   }
                                  
